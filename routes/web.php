@@ -13,6 +13,11 @@ use App\Http\Controllers\Usuario\UsuarioController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::view('/', 'inicio');
+Route::view('/login', 'login');
+Route::view('/registro', 'registro');
+Route::view('/contactenos', 'contactenos');
+Route::view('/error404', 'error404');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
