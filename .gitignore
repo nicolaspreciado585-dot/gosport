@@ -1,19 +1,49 @@
-/.phpunit.cache
-/node_modules
-/public/build
-/public/hot
-/public/storage
-/storage/*.key
-/vendor
+# ========================================
+# Laravel - Archivos y carpetas ignoradas
+# ========================================
+
+# Archivos de entorno (nunca deben subirse)
 .env
 .env.backup
+.env.local
 .env.production
-.phpunit.result.cache
-Homestead.json
-Homestead.yaml
-auth.json
+
+# Carpeta de dependencias de PHP (composer)
+vendor/
+
+# Carpeta de dependencias de Node.js
+node_modules/
+
+# Archivos de compilación de Laravel Mix / Vite
+public/hot
+public/storage
+storage/*.key
+.env.testing
+
+# Cache y logs de Laravel
+storage/app/*
+storage/framework/*
+storage/logs/*
+
+# Excepto storage/framework/.gitignore y storage/logs/.gitignore
+!storage/framework/.gitignore
+!storage/logs/.gitignore
+
+# Archivos de base de datos SQLite
+*.sqlite
+*.sqlite-journal
+
+# Archivos de sistema / IDEs
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Archivos de sistema operativos
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos de compilación y cache
 npm-debug.log
 yarn-error.log
-/.fleet
-/.idea
-/.vscode
