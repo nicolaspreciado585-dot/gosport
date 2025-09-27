@@ -35,40 +35,65 @@
 .btn-custom-login:hover {
     background-color: #FF6F00;
     color: white;
+    
+}
+.logo-header {
+    height: 30px; /* Reducido de 40px a 30px para hacerlo más pequeño */
+    width: auto;
+}
+
+/* Opcional: Estilo para que el texto GoSport se vea mejor */
+.navbar-brand .fw-bold {
+    /* Aquí se aplica el estilo que tenías para el texto GoSports */
+    color: #FF6F00 !important; 
+}
+.logo-header {
+    height: 45px; /* Tamaño más grande para que ocupe más espacio */
+    width: auto;
 }
 </style>
 </head>
 <body>
-    <!-- Navegación simple -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="{{ url('/') }}">GoSports</a>
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        
+        {{-- ESTRUCTURA HORIZONTAL Y ALINEADA --}}
+        <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
             
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            {{-- LOGO (usando la clase logo-header para el tamaño) --}}
+            {{-- Añadimos 'me-2' para un pequeño margen a la derecha del logo --}}
+            <img src="{{ asset('imagenes/Logo_Gosport.jpeg') }}" alt="GOSPORTS Logo" class="logo-header me-2">
             
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/') }}">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/contactenos') }}">Contáctanos</a>
-                    </li>
-                </ul>
-                
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="btn btn-custom-login me-2" href="{{ url('/login') }}">Iniciar Sesión</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-warning" href="{{ url('/register') }}">Registro</a>
-                    </li>
-                </ul>
-            </div>
+            {{-- TEXTO DE MARCA AL LADO --}}
+            <span class="fw-bold">GoSport</span>
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        {{-- ... resto del código ... --}}
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/') }}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/contactenos') }}">Contáctanos</a>
+                </li>
+            </ul>
+            
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="btn btn-custom-login me-2" href="{{ url('/login') }}">Iniciar Sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-warning" href="{{ url('/register') }}">Registro</a>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
     @yield('content')
     

@@ -15,22 +15,35 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
-
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+    {{-- ELIMINAR EL DIV GRIS PRINCIPAL DE BREEZE (opcional) --}}
+    
+    <header class="main-navbar">
+        <div class="logo-container">
+            <a href="{{ route('home') }}">
+                <img src="{{ asset('imagenes/Logo_Gosport.jpeg') }}" alt="GOSPORTS Logo" class="logo-header">
+            </a>
         </div>
-    </body>
+        
+        <nav class="main-nav">
+            {{-- Aquí puedes añadir tus enlaces principales (Inicio, Eventos, Contactos) --}}
+            <ul>
+                <li><a href="{{ route('home') }}">Inicio</a></li>
+                <li><a href="{{ route('contact') }}">Contáctenos</a></li>
+                {{-- Agrega los botones Login/Registro si el usuario no está autenticado --}}
+                @guest
+                    <li><a href="{{ route('login') }}" class="btn-nav">Login</a></li>
+                    <li><a href="{{ route('register') }}" class="btn-nav btn-primary">Registro</a></li>
+                @endguest
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {{ $slot }}
+    </main>
+    
+    {{-- Aquí iría el footer --}}
+</body>
+
+    
 </html>
