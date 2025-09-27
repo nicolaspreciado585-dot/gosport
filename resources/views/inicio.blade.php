@@ -1,7 +1,5 @@
-@extends('layouts.app')
-
+@extends('layouts.public')
 @section('title', 'Inicio - GoSports')
-
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/inicio.css') }}">
 
