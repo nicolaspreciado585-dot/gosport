@@ -10,6 +10,33 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+<style>
+.navbar-dark .navbar-brand {
+    color: #FF6F00 !important;
+    font-weight: 700;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255,255,255,.85) !important;
+    font-weight: 500;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #FF6F00 !important;
+}
+
+.btn-custom-login {
+    background-color: transparent;
+    border: 1px solid #FF6F00;
+    color: #FF6F00;
+    border-radius: 20px;
+}
+
+.btn-custom-login:hover {
+    background-color: #FF6F00;
+    color: white;
+}
+</style>
 </head>
 <body>
     <!-- Navegación simple -->
@@ -33,10 +60,10 @@
                 
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/login') }}">Iniciar Sesión</a>
+                        <a class="btn btn-custom-login me-2" href="{{ url('/login') }}">Iniciar Sesión</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/register') }}">Registro</a>
+                        <a class="btn btn-warning" href="{{ url('/register') }}">Registro</a>
                     </li>
                 </ul>
             </div>
