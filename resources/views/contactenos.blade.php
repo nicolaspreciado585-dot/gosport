@@ -3,6 +3,9 @@
 @section('title', 'Contáctenos - GoSports')
 
 @section('content')
+{{-- NOTA IMPORTANTE: Para que las clases 'card', 'btn', 'form-control', etc., funcionen, --}}
+{{-- debes asegurarte de que el CSS de Bootstrap esté cargado en tu archivo layouts/app.blade.php --}}
+
 <link rel="stylesheet" href="{{ asset('css/contactenos.css') }}">
 
 <section class="container py-5">
@@ -22,7 +25,6 @@
                     <form method="POST" action="{{ route('contacto.send') }}">
                         @csrf
 
-                      
                         <div class="mb-3">
                             <label class="form-label">Nombre</label>
                             <input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror" value="{{ old('nombre') }}" required>

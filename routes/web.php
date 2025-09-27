@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('inicio');
-});
+    return view('inicio'); // o el nombre de tu vista de inicio
+})->name('home');
 
 // Redirigir /registro a /register de Breeze
 Route::get('/registro', function() {
