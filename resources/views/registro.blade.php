@@ -22,9 +22,22 @@
               @error('name') <div class="text-danger">{{ $message }}</div> @enderror
             </div>
             <div class="col">
+              <label class="form-label">Apellido</label>
+              <input type="text" name="apellido" class="form-control" value="{{ old('apellido') }}" required>
+              @error('apellido') <div class="text-danger">{{ $message }}</div> @enderror
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col">
               <label class="form-label">Teléfono</label>
               <input type="number" name="telefono" class="form-control" value="{{ old('telefono') }}" required>
               @error('telefono') <div class="text-danger">{{ $message }}</div> @enderror
+            </div>
+            <div class="col">
+              <label class="form-label">Número de identificación</label>
+              <input type="number" name="numero_identificacion" class="form-control" value="{{ old('numero_identificacion') }}" required>
+              @error('numero_identificacion') <div class="text-danger">{{ $message }}</div> @enderror
             </div>
           </div>
 
@@ -37,12 +50,6 @@
               <option value="pasaporte" {{ old('tipo_documento')=='pasaporte'?'selected':'' }}>Pasaporte</option>
             </select>
             @error('tipo_documento') <div class="text-danger">{{ $message }}</div> @enderror
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Número de identificación</label>
-            <input type="number" name="numero_identificacion" class="form-control" value="{{ old('numero_identificacion') }}" required>
-            @error('numero_identificacion') <div class="text-danger">{{ $message }}</div> @enderror
           </div>
 
           <div class="mb-3">
@@ -81,3 +88,4 @@
   </div>
 </div>
 @endsection
+
