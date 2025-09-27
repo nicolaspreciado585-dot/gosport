@@ -37,9 +37,9 @@
             </div>
 
             <div class="flex items-center justify-between mt-4">
-                <a href="{{ url()->previous() }}" class="underline text-sm text-gray-700 hover:text-gray-900">
-                    {{ __('← Atrás') }}
-                </a>
+                <a href="{{ url('/') }}" class="underline text-sm text-gray-700 hover:text-gray-900">
+    {{ __('← Atrás') }}
+</a>
 
                 <x-button class="ms-4 bg-gray-900 hover:bg-gray-700 text-white">
                     {{ __('Iniciar Sesión') }}

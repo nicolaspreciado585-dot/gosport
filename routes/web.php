@@ -18,4 +18,6 @@ Route::get('/contactenos', function () {
 
 Route::post('/contactenos', [App\Http\Controllers\ContactoController::class, 'enviar'])
     ->name('contacto.send');
-
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
