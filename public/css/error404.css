@@ -1,0 +1,16 @@
+/* Estilos para página de error */
+.error-container {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.error-container h1 {
+  font-size: 6rem;
+  font-weight: bold;
+  color: red;
+}
+
+.error-container p {
+  font-size: 1.2rem;
+  margin-top: 20px;
+}

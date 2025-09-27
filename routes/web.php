@@ -1,29 +1,30 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Usuario\UsuarioController;
+use App\Http\Controllers\Auth\RegistroController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-Route::view('/', 'inicio');
-Route::view('/login', 'login');
-Route::view('/registro', 'registro');
-Route::view('/contactenos', 'contactenos');
-Route::view('/error404', 'error404');
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
+// Página de inicio
 Route::get('/', function () {
-    return view('welcome');
+    return view('inicio');
 });
 
-Route::resource('usuarios', UsuarioController::class)->names('usuarios');
+// Login
+Route::get('/login', function () {
+    return view('login');
+});
+
+// Registro
+Route::get('/registro', [RegistroController::class, 'index'])->name('registro');
+Route::post('/registro', [RegistroController::class, 'store'])->name('registro.store');
+
+// Contáctenos
+Route::get('/contactenos', function () {
+    return view('contactenos');
+});
+
+// Error 404
+Route::get('/error404', function () {
+    return view('error404');
+});
+
+

@@ -1,36 +1,54 @@
 @extends('layouts.app')
 
-@section('title', 'Inicio - GOSPORTS')
+@section('title', 'Inicio - GoSports')
 
 @section('content')
-<div class="text-center mb-5">
-  <h1>Bienvenido a GOSPORTS</h1>
-  <p class="lead">Las mejores canchas, eventos y promociones en un solo lugar.</p>
-</div>
+<link rel="stylesheet" href="{{ asset('css/inicio.css') }}">
 
-<!-- Galería de canchas -->
-<div class="row g-4">
-  <div class="col-md-4">
-    <div class="card shadow">
-      <img src="{{ asset('imagenes/imagen_cancha1.webp') }}" class="card-img-top" alt="Cancha 1">
-      <div class="card-body">
-        <h5 class="card-title">Canchas Sintéticas Bogotá Jardín Club</h5>
-        <p class="card-text">Cl. 61 Sur #80b-1, Bogotá <br> Horarios: L-V 6:00–18:00</p>
+<!-- Hero principal -->
+<section class="hero d-flex align-items-center justify-content-center text-center text-white">
+  <div class="overlay"></div>
+  <div class="hero-content">
+    <h1 class="display-4 fw-bold">Reserva tu cancha en segundos</h1>
+    <p class="lead">Fútbol · Baloncesto · Tenis</p>
+    <a href="{{ url('/login') }}" class="btn btn-acento btn-lg mt-3">Empezar ahora</a>
+  </div>
+</section>
+
+<!-- Sección de canchas -->
+<section class="container my-5">
+  <h2 class="text-center mb-4 fw-bold">Explora nuestras canchas</h2>
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card cancha-card">
+        <img src="{{ asset('images/cancha-futbol.jpg') }}" class="card-img-top" alt="Cancha de fútbol">
+        <div class="card-body text-center">
+          <h5 class="card-title">Fútbol 5</h5>
+          <p class="card-text">Cancha sintética iluminada · Disponible todos los días</p>
+          <a href="{{ url('/login') }}" class="btn btn-dark">Reservar</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card cancha-card">
+        <img src="{{ asset('images/cancha-basket.jpg') }}" class="card-img-top" alt="Cancha de baloncesto">
+        <div class="card-body text-center">
+          <h5 class="card-title">Baloncesto</h5>
+          <p class="card-text">Cancha techada · Ideal para torneos</p>
+          <a href="{{ url('/login') }}" class="btn btn-dark">Reservar</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card cancha-card">
+        <img src="{{ asset('images/cancha-tenis.jpg') }}" class="card-img-top" alt="Cancha de tenis">
+        <div class="card-body text-center">
+          <h5 class="card-title">Tenis</h5>
+          <p class="card-text">Superficie rápida · Disponibilidad por horas</p>
+          <a href="{{ url('/login') }}" class="btn btn-dark">Reservar</a>
+        </div>
       </div>
     </div>
   </div>
-  <div class="col-md-4">
-    <div class="card shadow">
-      <a href="https://goo.gl/maps/">
-        <img src="{{ asset('imagenes/imagen_cancha2.webp') }}" class="card-img-top" alt="Cancha 2">
-      </a>
-      <div class="card-body">
-        <h5 class="card-title">Cancha Gran Plaza Bosa</h5>
-        <p class="card-text">Cl. 64 Sur #77g-68, Bosa, Bogotá <br> Horarios: L-V 6:00–18:00</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="card shadow">
-      <img src="{{ asset('imagenes/imagen_cancha3.webp') }}" class="card-img-top" alt="Cancha 3">
-      <div class="card
+</section>
+@endsection

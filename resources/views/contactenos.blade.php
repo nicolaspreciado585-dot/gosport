@@ -3,6 +3,8 @@
 @section('title', 'Contáctenos - GOSPORTS')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/contactenos.css') }}">
+
 <div class="row justify-content-center">
   <div class="col-md-8">
     <div class="card shadow">

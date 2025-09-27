@@ -9,7 +9,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Tu CSS -->
-  <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
+ <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body class="d-flex flex-column min-vh-100">
 

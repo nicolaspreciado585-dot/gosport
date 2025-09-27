@@ -1,0 +1,49 @@
+/* Hero section */
+.hero {
+  position: relative;
+  height: 80vh;
+  background: url('../images/banner-sports.jpg') no-repeat center center/cover;
+}
+
+.hero .overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Botón acento */
+.btn-acento {
+  background: #00ff88;
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-acento:hover {
+  background: #00cc66;
+  transform: scale(1.05);
+}
+
+/* Cards modernas */
+.cancha-card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+
+.cancha-card:hover {
+  transform: translateY(-8px);
+}
+
+.cancha-card img {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}

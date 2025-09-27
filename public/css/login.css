@@ -1,0 +1,12 @@
+/* Estilos para login */
+.card {
+  margin-top: 50px;
+}
+
+.card-header {
+  font-size: 1.5rem;
+}
+
+form .form-label {
+  font-weight: bold;
+}
