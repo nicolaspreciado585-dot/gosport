@@ -11,7 +11,7 @@ Route::get('/', function () {
 // Login
 Route::get('/login', function () {
     return view('login');
-});
+})->name('login');
 
 // Registro
 Route::get('/registro', [RegistroController::class, 'index'])->name('registro');

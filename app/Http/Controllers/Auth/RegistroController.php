@@ -19,6 +19,8 @@ class RegistroController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
+            'apellidos' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
             'telefono' => 'required|numeric',
             'tipo_documento' => 'required|string',
             'numero_identificacion' => 'required|numeric|unique:users,numero_identificacion',
@@ -34,6 +36,8 @@ class RegistroController extends Controller
 
         User::create([
             'name' => $request->name,
+            'apellidos' => $request->apellidos,
+            'email' => $request->email,
             'telefono' => $request->telefono,
             'tipo_documento' => $request->tipo_documento,
             'numero_identificacion' => $request->numero_identificacion,

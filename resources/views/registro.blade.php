@@ -22,10 +22,16 @@
               @error('name') <div class="text-danger">{{ $message }}</div> @enderror
             </div>
             <div class="col">
-              <label class="form-label">Apellido</label>
-              <input type="text" name="apellido" class="form-control" value="{{ old('apellido') }}" required>
-              @error('apellido') <div class="text-danger">{{ $message }}</div> @enderror
+              <label class="form-label">Apellidos</label>
+              <input type="text" name="apellidos" class="form-control" value="{{ old('apellidos') }}" required>
+              @error('apellidos') <div class="text-danger">{{ $message }}</div> @enderror
             </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Correo electrónico</label>
+            <input type="email" name="email" class="form-control" value="{{ old('email') }}" required>
+            @error('email') <div class="text-danger">{{ $message }}</div> @enderror
           </div>
 
           <div class="row mb-3">
@@ -88,4 +94,3 @@
   </div>
 </div>
 @endsection
-
