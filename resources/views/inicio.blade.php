@@ -26,7 +26,7 @@
                     <a href="{{ url('/login') }}" class="btn btn-dark">Reservar</a>
                 </div>
             </div>
-        </div>
+     ñ   </div>
         <div class="col-md-4">
             <div class="card border-0 shadow-sm rounded">
                 <img src="{{ asset('images/cancha-basket.jpg') }}" class="card-img-top rounded" alt="Cancha de baloncesto">

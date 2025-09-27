@@ -1,7 +1,14 @@
 <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
-
+          <x-slot name="logo">
+            {{-- Logo de GoSports --}}
+            <a href="{{ url('/') }}">
+                <img src="{{ asset('images/gosport-logo.png') }}" alt="GoSports Logo" class="w-32 mx-auto">
+               <img src="{{ asset('imagenes/Logo_Gosport.jpeg') }}" alt="GoSports Logo" class="w-21 mx-auto">
+            
+            </a>
+        </x-slot>
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />

@@ -1,40 +1,34 @@
 @extends('layouts.app')
 
-@section('title', 'Login - GoSports')
+@section('title', 'Login - GOSPORTS')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/login.css') }}">
-
-<section class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-lg rounded">
-                <div class="card-header bg-dark text-white text-center">
-                    <h2 class="fw-bold">Iniciar sesión</h2>
-                </div>
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="mb-3">
-                            <label class="form-label">Correo electrónico</label>
-                            <input type="email" name="email" class="form-control" value="{{ old('email') }}" required>
-                            @error('email') <div class="text-danger">{{ $message }}</div> @enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Contraseña</label>
-                            <input type="password" name="password" class="form-control" required>
-                            @error('password') <div class="text-danger">{{ $message }}</div> @enderror
-                        </div>
-
-                        <button type="submit" class="btn btn-dark w-100">Iniciar sesión</button>
-                        <p class="text-center mt-3">¿No tienes cuenta? <a href="{{ url('/registro') }}">Regístrate</a></p>
-                    </form>
-                </div>
-            </div>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card shadow">
+      <div class="card-header bg-dark text-white text-center">
+        <h2>Iniciar Sesión</h2>
+      </div>
+      <div class="card-body">
+        <form method="POST" action="#">
+          @csrf
+          <div class="mb-3">
+            <label for="correo" class="form-label">Correo electrónico</label>
+            <input type="email" id="correo" name="correo" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="contrasena" class="form-label">Contraseña</label>
+            <input type="password" id="contrasena" name="contrasena" class="form-control" required>
+          </div>
+          <button type="submit" class="btn btn-dark w-100">Iniciar Sesión</button>
+        </form>
+        <div class="mt-3 text-center">
+          <a href="{{ url('/registro') }}">¿No tienes cuenta? Regístrate</a><br>
+          <a href="{{ url('/contactenos') }}">¿Olvidaste tu contraseña?</a>
         </div>
+      </div>
     </div>
-</section>
+  </div>
+</div>
 @endsection
 
