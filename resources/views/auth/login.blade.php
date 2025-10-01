@@ -2,12 +2,14 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
      <x-slot name="logo">
-            {{-- Logo de GoSports --}}
-            <a href="{{ url('/') }}">
-                <img src="{{ asset('images/gosport-logo.png') }}" alt="GoSports Logo" class="w-32 mx-auto">
-               <img src="{{ asset('imagenes/Logo_Gosport.jpeg') }}" alt="GoSports Logo" class="w-32 mx-auto">
-            </a>
-        </x-slot>
+    <a href="{{ url('/') }}">
+        <img src="{{ asset('imagenes/Logo_Gosport.jpeg') }}" 
+             alt="GoSports Logo" 
+             class="w-32 mx-auto rounded shadow">
+    </a>
+</x-slot>
+
+
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
