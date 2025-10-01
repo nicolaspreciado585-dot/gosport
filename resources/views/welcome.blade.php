@@ -14,33 +14,34 @@
     <link rel="stylesheet" href="{{ asset('css/inicio.css') }}">
     
     <style>
-        /* Estilos básicos para el Hero */
-        .hero {
-            position: relative; 
-            height: 90vh; 
-            background: url('{{ asset('images/hero-bg.jpg') }}') center/cover no-repeat;
-        }
-        .overlay {
-            position: absolute; 
-            inset: 0; 
-            background: rgba(0,0,0,0.5);
-        }
-        .hero-content {
-            position: relative; 
-            z-index: 2;
-        }
-        /* Color de acento de ejemplo (ajusta según tu CSS) */
-        .btn-acento, .text-acento {
-            background-color: #FF2D20; /* Color de acento de Laravel por defecto, ajústalo! */
-            color: white;
-            border-color: #FF2D20;
-        }
-        .btn-acento:hover {
-            background-color: #CC241A;
-            color: white;
-            border-color: #CC241A;
-        }
-    </style>
+    /* Estilos básicos para el Hero */
+    .hero {
+        position: relative; 
+        height: 90vh; 
+        /* RUTA CORREGIDA */
+        background: url('{{ asset('imagenes/Imagenlandingpage.png') }}') center/cover no-repeat;
+    }
+    .overlay {
+        position: absolute; 
+        inset: 0; 
+        background: rgba(0,0,0,0.5);
+    }
+    .hero-content {
+        position: relative; 
+        z-index: 2;
+    }
+    /* Color de acento de ejemplo (ajusta según tu CSS) */
+    .btn-acento, .text-acento {
+        background-color: #FF2D20; /* Color de acento de Laravel por defecto, ajústalo! */
+        color: white;
+        border-color: #FF2D20;
+    }
+    .btn-acento:hover {
+        background-color: #CC241A;
+        color: white;
+        border-color: #CC241A;
+    }
+</style>
 </head>
 <body class="antialiased">
     @if (Route::has('login'))
@@ -56,9 +57,9 @@
             @auth
                 <a href="{{ url('/dashboard') }}" class="btn btn-outline-light me-2">Dashboard</a>
             @else
-                <a href="{{ route('login') }}" class="btn btn-outline-light me-2">Log in</a>
+                <a href="{{ route('login') }}" class="btn btn-outline-light me-2">Iniciar Sesión</a>
                 @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="btn btn-light">Register</a>
+                    <a href="{{ route('register') }}" class="btn btn-light">Registrarse</a>
                 @endif
             @endauth
         </div>
@@ -82,7 +83,7 @@
             {{-- Tarjeta 1: Fútbol --}}
             <div class="col-md-4">
                 <div class="card border-0 shadow-sm rounded">
-                    <img src="{{ asset('images/cancha-futbol.jpg') }}" class="card-img-top rounded" alt="Cancha de fútbol">
+                    <img src="{{ asset('imagenes/Futbol.png') }}" class="card-img-top rounded" alt="Cancha de fútbol">
                     <div class="card-body text-center">
                         <h5 class="card-title fw-bold">Fútbol 5</h5>
                         <p class="card-text text-muted">Cancha sintética iluminada · Disponible todos los días</p>
@@ -98,7 +99,7 @@
             {{-- Tarjeta 2: Baloncesto --}}
             <div class="col-md-4">
                 <div class="card border-0 shadow-sm rounded">
-                    <img src="{{ asset('images/cancha-basket.jpg') }}" class="card-img-top rounded" alt="Cancha de baloncesto">
+                    <img src="{{ asset('imagenes/Basquet.png') }}" class="card-img-top rounded" alt="Cancha de baloncesto">
                     <div class="card-body text-center">
                         <h5 class="card-title fw-bold">Baloncesto</h5>
                         <p class="card-text text-muted">Cancha techada · Ideal para torneos</p>
@@ -113,7 +114,7 @@
             {{-- Tarjeta 3: Tenis --}}
             <div class="col-md-4">
                 <div class="card border-0 shadow-sm rounded">
-                    <img src="{{ asset('images/cancha-tenis.jpg') }}" class="card-img-top rounded" alt="Cancha de tenis">
+                    <img src="{{ asset('imagenes/Tenis.png') }}" class="card-img-top rounded" alt="Cancha de tenis">
                     <div class="card-body text-center">
                         <h5 class="card-title fw-bold">Tenis</h5>
                         <p class="card-text text-muted">Superficie rápida · Disponibilidad por horas</p>
