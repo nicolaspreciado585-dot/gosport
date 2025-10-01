@@ -57,7 +57,7 @@ footer a:hover {
 /* Botones */
 .btn-dark {
   background-color: #000 !important;
-  color: #fff !important;
+  color: #000000 !important;
 }
 
 .btn-dark:hover {

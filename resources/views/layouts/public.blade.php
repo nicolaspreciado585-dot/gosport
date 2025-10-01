@@ -65,7 +65,7 @@
             <img src="{{ asset('imagenes/Logo_Gosport.jpeg') }}" alt="GOSPORTS Logo" class="logo-header me-2">
             
             {{-- TEXTO DE MARCA AL LADO --}}
-            <span class="fw-bold">GoSport</span>
+            <span class="fw-bold">GoSport </span>
         </a>
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -85,7 +85,7 @@
             
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="btn btn-custom-login me-2" href="{{ url('/login') }}">Iniciar Sesión</a>
+                    <a class="btn btn-custom-login me-2" href="{{ url('/login') }}">Iniciar sesion</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-warning" href="{{ url('/register') }}">Registro</a>

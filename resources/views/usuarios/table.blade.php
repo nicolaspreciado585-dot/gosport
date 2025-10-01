@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,49 +30,49 @@
         <table id="usuarios" class="display" style="width:100%">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Nombre</th>
                     <th>Correo</th>
                     <th>Teléfono</th>
+                    <th>rol</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>1</td>
                     <td>Nicolás Felipe Preciado Rodríguez</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Johan Sebastián Talero Ovalle</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Manuel Alejandro Alejo Poveda</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Daniel Santiago Cortes Gil</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>David Felipe Garzón Gutiérrez</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>Juan Esteban Vargas Vargas</td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                    <td>nicolas10@gmailcom</td>
+                    <td>300 456 7890</td>
+                    <th>admin_cancha</th>
+                    </tr>
+                    <tr>
+                        <td>Johan Sebastián Talero Ovalle</td>
+                        <td>johan40@gmailcom</td>
+                        <td>310 987 6543</td>
+                        <th>admin_app</th>
+                    </tr>
+                    <tr>
+                        <td>Manuel Alejandro Alejo Poveda</td>
+                        <td>manuelale@gmailcom</td>
+                        <td>312 345 6789</td>
+                        <th>admin_cancha</th>
+                    </tr>
+                    <tr>
+                        <td>Daniel Santiago Cortes Gil</td>
+                        <td>daniel20@gmailcom</td>
+                        <td>315 876 5432</td>
+                        <th>jugador</th>
+                    </tr>
+                    <tr>
+                        <td>David Felipe Garzón Gutiérrez</td>
+                        <td>david30@gmailcom</td>
+                        <td>320 123 4567</td>
+                        <th>admin_app</th>
+                    </tr>
+                    <tr>
+                        <td>Juan Esteban Vargas Vargas</td>
+                        <td>juanE13@gmailcom</td>
+                        <td>310 987 6543</td>
+                        <th>jugador</th>
+                    </tr>
             </tbody>
         </table>
     </div>
