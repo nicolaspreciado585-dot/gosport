@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Usuario;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash; // ¡Necesitas agregar esta línea!
+use App\Models\Usuario;
+use App\Models\Rol;
+use App\Models\Cancha;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -14,8 +16,11 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuarios = User::all();
-        return view('usuarios.index', compact('usuarios'));
+        $usuarios = Usuario::with('rol')
+            ->orderBy('id_usuario')
+            ->get();
+
+        return view('usuarios.table', compact('usuarios'));
     }
 
     /**
@@ -23,42 +28,80 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        return view('usuarios.create');
+        return view('usuarios.create', [
+            'rol' => rol::orderBy('nombre_rol')->get(['id_rol','nombre_rol'])
+        ]);
     }
 
+    public function show(Usuario $usuario)
+    {
+    return view('usuarios.show', compact('usuario'));
+    }
     /**
      * Guarda un nuevo usuario en la base de datos.
      */
-    public function store(Request $request)
+public function store(Request $request)
+{
+    $request->validate([
+        'nombre' => 'required|string|max:100',
+        'correo' => 'required|email|unique:usuarios,correo',
+        'contraseña' => 'required|string|min:6',
+        'telefono' => 'nullable|string|max:10',
+    ]);
+
+    Usuario::create([
+        'nombre' => $request->nombre,
+        'correo' => $request->correo,
+        'contraseña' => Hash::make($request->contraseña), // encriptamos
+        'telefono' => $request->telefono,
+    ]);
+
+    return redirect()->route('usuarios.index')->with('ok', 'Usuario creado correctamente.');
+}
+
+
+    /**
+     * Muestra el formulario de edición de un usuario.
+     */
+    public function edit(Usuario $usuario)
     {
-        // 1. Validación de los datos
-        $request->validate([
-            'nombres' => 'required|string|max:255',
-            'apellidos' => 'required|string|max:255',
-            'tipo_documento' => 'required|string',
-            'numero_documento' => 'required|string|max:255',
-            'tipo_sangre' => 'required|string',
-            'correo' => 'required|string|email|max:255|unique:users,email',
-            'direccion' => 'required|string|max:255',
-            'telefono' => 'required|string|max:255',
+        return view('usuarios.edit', [
+            'usuario' => $usuario,
+            'rol' => rol::orderBy('nombre_rol')->get(['id_rol','nombre_rol'])
         ]);
+    }
 
-        // 2. Crear un nuevo registro
-        $usuario = new User([
-            'name' => $request->nombres,
-            'apellidos' => $request->apellidos,
-            'tipo_documento' => $request->tipo_documento,
-            'numero_documento' => $request->numero_documento,
-            'tipo_sangre' => $request->tipo_sangre,
-            'email' => $request->correo,
-            'direccion' => $request->direccion,
-            'telefono' => $request->telefono,
-            'password' => Hash::make('password'), // ¡Importante! Asigna una contraseña por defecto
-        ]);
+    /**
+     * Actualiza un usuario en la base de datos.
+     */
+public function update(Request $request, Usuario $usuario)
+{
+     $request->validate([
+        'nombre' => 'required|string|max:100',
+        'correo' => 'required|email|unique:usuarios,correo,' . $usuario->id_usuario . ',id_usuario',
+        'telefono' => 'nullable|string|max:10',
+    ]);
 
-        $usuario->save();
+    $usuario->update([
+        'nombre' => $request->nombre,
+        'correo' => $request->correo,
+        'telefono' => $request->telefono,
+    ]);
 
-        // 3. Redirigir a la vista principal de la tabla
-        return redirect()->route('usuarios.index')->with('success', 'Usuario creado exitosamente.');
+    return redirect()->route('usuarios.index')->with('ok', 'Usuario actualizado exitosamente.');
+}
+
+
+    /**
+     * Elimina un usuario de la base de datos.
+     */
+    public function destroy(Usuario $usuario)
+    {
+        try {
+            $usuario->delete();
+            return back()->with('ok','Usuario eliminado correctamente.');
+        } catch (\Throwable $e) {
+            return back()->withErrors('No se puede eliminar: tiene registros relacionados.');
+        }
     }
 }

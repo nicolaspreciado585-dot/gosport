@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Usuario
+ * Class Usuarios
  * 
  * @property int $id_usuario
  * @property string|null $nombre
@@ -30,7 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Usuario extends Model
 {
-	protected $table = 'usuario';
+	protected $table = 'usuarios';
 	protected $primaryKey = 'id_usuario';
 	public $timestamps = false;
 
@@ -43,8 +43,11 @@ class Usuario extends Model
 		'correo',
 		'contraseña',
 		'telefono',
-		'id_rol'
+		'Tipo_Doc',
+		'documento',
+		'id_rol', // si lo usas
 	];
+
 
 	public function rol()
 	{
@@ -53,7 +56,7 @@ class Usuario extends Model
 
 	public function canchas()
 	{
-		return $this->hasMany(Cancha::class, 'id_admin_cancha');
+		return $this->hasMany(Cancha::class, 'id_cancha');
 	}
 
 	public function facturas()
