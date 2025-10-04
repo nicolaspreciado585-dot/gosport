@@ -6,19 +6,23 @@ use Illuminate\Http\Request;
 
 class ContactoController extends Controller
 {
-    public function enviar(Request $request)
+    public function index()
     {
+        return view('contacto.index');
+    }
+
+    public function store(Request $request)
+    {
+        // Validar datos
         $request->validate([
-            'nombre' => 'required|string|max:255',
-            'apellido' => 'required|string|max:100',
-            'telefono' => 'required|string|max:20',
+            'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'mensaje' => 'required|string',
+            'message' => 'required|string|min:5',
         ]);
 
-        // Aquí puedes enviar correo o guardar en DB
-        // Por ahora solo redirige con mensaje
-        return redirect()->route('contacto.form')
-                         ->with('success', 'Mensaje enviado correctamente.');
-    }
+        // Aquí podrías guardar en BD o enviar correo
+        // Contacto::create($request->all());
+
+        return back()->with('success', 'Tu mensaje fue enviado correctamente.');
+}
 }

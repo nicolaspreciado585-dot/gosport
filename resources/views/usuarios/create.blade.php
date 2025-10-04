@@ -1,9 +1,15 @@
     <x-app-layout>
-        <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Crear usuario') }}
-            </h2>
-        </x-slot>
+<x-slot name="header">
+    <div class="flex items-center gap-4">
+        <!-- Logo -->
+        <img src="{{ asset('imagenes/Logo_Gosport.jpeg') }}" alt="Logo" class="h-12 rounded">
+
+        <!-- Título -->
+        <h2 class="font-semibold text-xl text-white leading-tight">
+            {{ __('Crear usuario') }}
+        </h2>
+    </div>
+</x-slot>
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -63,7 +69,7 @@
                                     {{-- BOTONES --}}
                                     <div class="pt-4 flex gap-3">                                    
                                         <button type="submit" 
-                                            class="px-4 py-2 border rounded bg-green-600 text-white hover:bg-green-700">
+                                            class="px-4 py-2 border rounded bg-blue-600 text-white hover:bg-blue-700">
                                             Guardar
                                         </button>
 
@@ -81,4 +87,27 @@
                 </div>
             </div>
         </div>
+    <style>
+    body .input {
+        background-color: #32373dff !important; /* negro absoluto */
+        color: white; /* texto blanco para contraste */
+    }
+    
+    img{
+        width: 50px;
+        height: 50px;
+    }
+    /* Opcional: Cambiar fondo de los contenedores a negro */
+    .bg-white {
+        background-color: #32373dff !important;
+        color: white;
+    }
+    input{
+        color: black;
+    }
+
+    .text-gray-800 {
+        color: #fff !important;
+    }
+</style>
     </x-app-layout>
