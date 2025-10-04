@@ -4,34 +4,45 @@
 
 # Archivos de entorno (nunca deben subirse)
 .env
-.env.backup
-.env.local
-.env.production
+.env.*
+!.env.example
 
-# Carpeta de dependencias de PHP (composer)
-vendor/
+# Dependencias PHP (composer)
+/vendor/
 
-# Carpeta de dependencias de Node.js
-node_modules/
+# Dependencias Node.js
+/node_modules/
 
-# Archivos de compilación de Laravel Mix / Vite
-public/hot
-public/storage
-storage/*.key
-.env.testing
+# Archivos de compilación Laravel Mix / Vite
+/public/hot
+/public/storage
+/public/css
+/public/js
+/public/mix-manifest.json
 
-# Cache y logs de Laravel
-storage/app/*
-storage/framework/*
-storage/logs/*
+# Cache y llaves de Laravel
+/storage/*.key
+/storage/app/*
+/storage/framework/*
+/storage/logs/*
 
-# Excepto storage/framework/.gitignore y storage/logs/.gitignore
+# Mantener gitignore internos
 !storage/framework/.gitignore
 !storage/logs/.gitignore
 
 # Archivos de base de datos SQLite
 *.sqlite
 *.sqlite-journal
+
+# PHPUnit y otros caches
+.phpunit.result.cache
+.phpunit.cache
+.php_cs.cache
+
+# Logs de npm/yarn/pnpm
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
 
 # Archivos de sistema / IDEs
 .idea/
@@ -44,6 +55,3 @@ storage/logs/*
 Thumbs.db
 desktop.ini
 
-# Archivos de compilación y cache
-npm-debug.log
-yarn-error.log
