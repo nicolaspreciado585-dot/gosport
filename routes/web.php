@@ -3,15 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Usuario\UsuarioController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Aquí defines todas tus rutas web.
-|
-*/
+use App\Http\Controllers\ReservaController;
 
 // Página pública de bienvenida
 Route::get('/', function () {
@@ -33,19 +25,21 @@ Route::middleware([
     // CRUD Usuarios
     Route::resource('usuarios', UsuarioController::class);
 
-    // Módulo de reservas (formulario)
-    // Ruta sin parámetro: formulario vacío
-    Route::get('/reservas/create', function () {
-        return view('reservas.create');
-    })->name('reservas.create');
+    // Módulo de reservas (solo formulario)
+    Route::get('/reservas/create', [ReservaController::class, 'createEmpty'])
+         ->name('reservas.create');
 
-    // Ruta con cancha seleccionada
-    Route::get('/reservas/create/{cancha}', function($cancha) {
-        return view('reservas.create', ['canchaSeleccionada' => $cancha]);
-    })->name('reservas.create.cancha');
+    Route::get('/reservas/create/{id_cancha}', [ReservaController::class, 'create'])
+         ->name('reservas.create.cancha');
+
+    // Página de confirmación de reserva (POST desde formulario)
+    Route::post('/reservas/confirmacion', function() {
+        return view('reservas.confirmacion');
+    })->name('reservas.confirmacion');
 
     // Perfil
     Route::get('/profile', [ProfileController::class, 'show'])
         ->name('profile.show');
 });
+
 

@@ -1,78 +1,113 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Reservar Cancha') }}
+            {{ __('Reservar cancha') }}
         </h2>
     </x-slot>
 
-    <div class="py-8 px-6 bg-gray-100 min-h-screen flex justify-center">
-        <div class="bg-white rounded-xl shadow-lg w-full max-w-3xl p-6">
+    <div class="py-8 px-6 bg-gray-100 min-h-screen">
+        <div class="max-w-3xl mx-auto bg-white p-6 rounded-2xl shadow-lg">
 
-            <!-- Vista previa de la cancha seleccionada -->
-            @isset($canchaSeleccionada)
-                <div class="mb-6 p-4 bg-indigo-50 rounded-lg flex items-center gap-4">
-                    <svg class="w-6 h-6 text-indigo-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3"></path>
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8V4m0 0L8 8m4-4l4 4"></path>
-                    </svg>
-                    <div>
-                        <p class="text-indigo-700 font-semibold">Cancha seleccionada:</p>
-                        <p class="font-bold text-gray-800">{{ $canchaSeleccionada }}</p>
-                    </div>
+            @if(isset($cancha))
+            <!-- Card de la cancha -->
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-6 mb-6 animate-fadeIn">
+                <img src="{{ asset($cancha->foto) }}"
+                     alt="{{ $cancha->nombre }}"
+                     class="w-full md:w-48 h-48 object-cover rounded-xl shadow-md">
+                <div class="flex-1">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">{{ $cancha->nombre }}</h3>
+                    <p class="text-gray-600 mb-1">📍 {{ $cancha->direccion->direccion ?? 'Sin dirección' }}</p>
+                    <p class="text-gray-600 mb-1">🏷️ Deporte: {{ $cancha->deporte->nombre ?? 'Sin deporte' }}</p>
+                    <span class="inline-block mt-2 px-3 py-1 text-sm font-semibold rounded-full {{ $cancha->estado === 'disponible' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                        {{ ucfirst($cancha->estado) }}
+                    </span>
                 </div>
-            @endisset
+            </div>
+            @endif
 
-            <form action="#" method="POST" class="space-y-6">
+            @auth
+            <form id="reservaForm" class="space-y-4" onsubmit="return validarFormulario()" action="{{ route('reservas.confirmacion') }}" method="POST">
                 @csrf
 
-                <!-- Nombre del usuario -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Nombre completo</label>
-                    <input type="text" name="nombre" placeholder="Juan Pérez" 
-                           class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <label class="block text-gray-700 font-semibold mb-1">Nombre del usuario</label>
+                    <input type="text" name="nombre_usuario" value="{{ auth()->user()->name }}" readonly
+                           class="w-full border-gray-300 rounded-lg shadow-sm bg-gray-100 cursor-not-allowed">
                 </div>
 
-                <!-- Correo -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
-                    <input type="email" name="email" placeholder="correo@ejemplo.com" 
-                           class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <label class="block text-gray-700 font-semibold mb-1">Fecha</label>
+                    <input type="date" name="fecha_reserva" id="fecha_reserva"
+                           class="w-full border-gray-300 rounded-lg shadow-sm" required>
+                    <p id="error_fecha" class="text-red-600 text-sm mt-1 hidden">Debes seleccionar una fecha</p>
                 </div>
 
-                <!-- Fecha de reserva -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Fecha</label>
-                    <input type="date" name="fecha" 
-                           class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <label class="block text-gray-700 font-semibold mb-1">Hora inicio</label>
+                    <input type="time" name="hora_inicio" id="hora_inicio"
+                           class="w-full border-gray-300 rounded-lg shadow-sm" required>
+                    <p id="error_hora_inicio" class="text-red-600 text-sm mt-1 hidden">Debes seleccionar la hora de inicio</p>
                 </div>
 
-                <!-- Hora de reserva -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Hora</label>
-                    <input type="time" name="hora" 
-                           class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <label class="block text-gray-700 font-semibold mb-1">Hora fin</label>
+                    <input type="time" name="hora_fin" id="hora_fin"
+                           class="w-full border-gray-300 rounded-lg shadow-sm" required>
+                    <p id="error_hora_fin" class="text-red-600 text-sm mt-1 hidden">Debes seleccionar la hora de fin</p>
                 </div>
 
-                <!-- Deporte -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Deporte</label>
-                    <select name="deporte" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                        <option value="">Selecciona un deporte</option>
-                        <option value="futbol">Fútbol</option>
-                        <option value="tenis">Tenis</option>
-                        <option value="basket">Básquetbol</option>
-                    </select>
-                </div>
-
-                <!-- Botón reservar -->
-                <div class="text-right">
-                    <button type="submit" 
-                            class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-500 transition duration-300">
-                        Reservar
-                    </button>
-                </div>
+                <button type="submit" class="w-full bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-500 transition">
+                    Reservar
+                </button>
             </form>
+
+            <script>
+                function validarFormulario() {
+                    let valido = true;
+                    document.querySelectorAll('p.text-red-600').forEach(el => el.classList.add('hidden'));
+
+                    const fecha = document.getElementById('fecha_reserva').value;
+                    const inicio = document.getElementById('hora_inicio').value;
+                    const fin = document.getElementById('hora_fin').value;
+
+                    if (!fecha) {
+                        document.getElementById('error_fecha').classList.remove('hidden');
+                        valido = false;
+                    }
+                    if (!inicio) {
+                        document.getElementById('error_hora_inicio').classList.remove('hidden');
+                        valido = false;
+                    }
+                    if (!fin) {
+                        document.getElementById('error_hora_fin').classList.remove('hidden');
+                        valido = false;
+                    }
+
+                    if (inicio && fin && inicio >= fin) {
+                        alert("La hora de fin debe ser mayor que la hora de inicio");
+                        valido = false;
+                    }
+
+                    return valido;
+                }
+            </script>
+
+            @else
+            <div class="text-center py-8">
+                <p class="text-gray-700 mb-4">Debes iniciar sesión para reservar una cancha.</p>
+                <a href="{{ route('login') }}" class="inline-block bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-500">
+                    Iniciar sesión
+                </a>
+            </div>
+            @endauth
         </div>
     </div>
+
+    <style>
+        @keyframes fadeIn { 0% { opacity: 0; transform: translateY(20px);} 100% {opacity:1; transform: translateY(0);} }
+        .animate-fadeIn { animation: fadeIn 0.8s ease-out forwards; }
+    </style>
 </x-app-layout>
+
+
 
