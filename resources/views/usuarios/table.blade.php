@@ -1,14 +1,12 @@
 <x-app-layout>
-    <x-slot name="header">
-        <style>
-        header{
-            background:gray;
-        }
-        </style>
+<x-slot name="header">
+    <div class="flex items-center gap-4">
+        <img src="{{ asset('imagenes/Logo_Gosport.jpeg') }}" id="img" alt="Logo" class="h-12">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Usuarios') }}
         </h2>
-    </x-slot>
+    </div>
+</x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -86,4 +84,26 @@
             });
         });
     </script>
+
+
+<style>
+    body {
+        background-color: #32373dff !important; /* negro absoluto */
+        color: white; /* texto blanco para contraste */
+    }
+    
+    img{
+        width: 50px;
+        height: 50px;
+    }
+    /* Opcional: Cambiar fondo de los contenedores a negro */
+    .bg-white {
+        background-color: #32373dff !important;
+    }
+
+    .text-gray-800 {
+        color: #fff !important;
+    }
+</style>
+
 </x-app-layout>
