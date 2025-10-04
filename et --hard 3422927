@@ -1,0 +1,42 @@
+[33mde04e31[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Actualizar assets compilados: eliminar viejos y agregar nuevos
+[33m35f34dc[m Subir assets compilados para que el dashboard se vea correctamente
+[33m3422927[m Modernizacion dashboard e insertar imagenes de canchas
+[33m30f247e[m chore: actualizar .gitignore para equipo
+[33m7d0f432[m Añadidas gráficas animadas y mejoras al dashboard GoSports
+[33m1fffaeb[m creacion de seeders de tabla usuarios
+[33mecbd3eb[m Resuelto conflicto en navigation - corregidas rutas de perfil
+[33mbc40baa[m Agregado archivo navigation con correcciones de rutas
+[33m4680e56[m tabla con estilo
+[33m171c083[m tabla usuarios mejorada
+[33mbdf9213[m Habilitar Data tables
+[33mb6809ed[m Feature: Adaptación completa de Login/Register a diseño oscuro con Bootstrap y traducción a español. Se agregaron imágenes para la landing page.
+[33m4c7f909[m ajuste en app.blade.php y pantallas originales laravel
+[33m666e9b5[m Actualización general: login, dashboard, layout y rutas
+[33m5fb2136[m Merge branch 'main' of https://github.com/nicolaspreciado585-dot/gosport
+[33m3f4a039[m cambio registro
+[33mfd9023f[m[33m ([m[1;31morigin/mi-rama[m[33m)[m esto es una prueba de commit
+[33m7991373[m migracion y configuracion para conexion base de datos
+[33mec9fda9[m fixe: aplicacion y retorno de vistas
+[33mc5c8c2e[m Merge branch 'main' of https://github.com/nicolaspreciado585-dot/gosport
+[33m99ead1b[m FIX: Resuelve error 'Undefined variable ', ajusta app.blade.php a @yield, y corrige nombres de rutas en la navegacion.
+[33m86bac34[m Preparo proyecto para revisión: actualizaciones en User, Registro, Contacto y rutas
+[33m11f2af4[m feat: Integrar logo de GoSport en Navbar y vistas de autenticación
+[33m5ddc5aa[m Actualizar RegisteredUserController para redirigir a login tras registro y ajustar formulario
+[33m54b3a94[m Adapt register.blade.php con paleta GoSports y botón de atrás
+[33m495930f[m Solucionado sistema de navegación y layouts - página inicio funcional
+[33m7ea1ed9[m Agregada navegación pública y solucionado layout de página de inicio
+[33m97adccb[m Agregada navegación pública y solucionado layout de página de inicio
+[33m48bfc66[m Ajuste pantallas y controladores
+[33md7aa6cf[m Actualizadas vistas y rutas; agregado ContactoController
+[33ma7b9bd1[m Actualización de registro: controlador, modelo User, vista registro y rutas; agregadas migraciones
+[33m992c985[m Agregar apellido al registro y actualizar controlador y formulario
+[33m9f7dfea[m Actualizar vistas, registro de usuarios y controlador con campos extra
+[33m35d68db[m Agrego todas las vistas (inicio, login, registro, contacto, error404) y actualizo layout
+[33m969392c[m Agrego .gitignore optimizado para Laravel
+[33mc697fd3[m Configuración de rutas
+[33mc5acf96[m Init Laravel 11 + Jetstream
+[33m0926882[m carpeta requests
+[33m9470ecc[m Agregada carpeta gosport al repositorio
+[33mc3695c4[m Se agregan las columnas extra a la tabla de usuarios y se corrige el controlador
+[33mb699392[m Agregar tabla de usuarios con DataTables
+[33mc2b21b3[m Initial commit - Proyecto GoSport Laravel
