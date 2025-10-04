@@ -1,5 +1,6 @@
 <x-app-layout>
-    <x-slot name="header">
+    <x-slot name="header"><br>
+    <br>
         <div class="flex items-center gap-4">
         <!-- Logo -->
         <img src="{{ asset('imagenes/Logo_Gosport.jpeg') }}" alt="Logo" class="h-12 rounded">
@@ -50,7 +51,7 @@
                                 {{-- BOTONES --}}
                                 <div class="pt-4 flex gap-3">
                                     <button type="submit"
-                                        class="px-4 py-2 border rounded bg-green-600 text-white ">
+                                        class="px-4 py-2 border rounded bg-gray-400 text-white hover:bg-gray-500">
                                         Guardar
                                     </button>
                                     <a href="{{ route('usuarios.index') }}"

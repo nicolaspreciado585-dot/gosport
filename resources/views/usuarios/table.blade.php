@@ -1,9 +1,10 @@
 <x-app-layout>
-<x-slot name="header">
+<x-slot name="header"><br>
+<br>
     <div class="flex items-center gap-4">
         <img src="{{ asset('imagenes/Logo_Gosport.jpeg') }}" id="img" alt="Logo" class="h-12">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Usuarios') }}
+            {{ __('Tabla Usuarios') }}
         </h2>
     </div>
 </x-slot>

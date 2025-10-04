@@ -22,7 +22,12 @@
                             class="text-gray-200 hover:text-white font-medium transition">
                     {{ __('Dashboard') }}
                 </x-nav-link>
-
+                <x-nav-link :href="route('usuarios.index')" 
+                            :active="request()->routeIs('usuarios.index')" 
+                            class="text-gray-200 hover:text-white font-medium transition">
+                    {{ __('Usuarios') }}
+                </x-nav-link>
+                
                 <!-- Buscador -->
                 <div class="relative">
                     <input type="text" 

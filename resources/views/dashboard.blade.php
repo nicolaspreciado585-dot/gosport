@@ -1,5 +1,7 @@
 <x-app-layout>
-    <x-slot name="header">
+    <x-slot name="header"><br>
+    <br>
+    <br>
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard GoSports - Bosa') }}
         </h2>
