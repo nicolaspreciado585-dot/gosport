@@ -36,8 +36,12 @@ Route::middleware([
     })->name('reservas.confirmacion');
 
     // Perfil
-    Route::get('/profile', [ProfileController::class, 'show'])
-      ->name('user.profile.show');
+    // Perfil
+    Route::get('/profile', [ProfileController::class, 'edit'])
+        ->name('perfil.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])
+        ->name('perfil.update');
+
     
     //Rutas para CRUD MODULO RESERVAS
     // Historial de reservas

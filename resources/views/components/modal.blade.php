@@ -1,8 +1,9 @@
 @props([
-    'name',
+    'name' => 'modalDefault',  // valor por defecto
     'show' => false,
     'maxWidth' => '2xl'
 ])
+
 
 @php
 $maxWidth = [
