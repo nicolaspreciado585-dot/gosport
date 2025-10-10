@@ -14,6 +14,12 @@ use Illuminate\Support\Str;
 use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable;
 use Laravel\Fortify\Fortify;
 
+// 🔹 Importaciones necesarias para la personalización
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
+use App\Models\User;
+use Illuminate\Support\Facades\Route;
+
 class FortifyServiceProvider extends ServiceProvider
 {
     /**
@@ -44,5 +50,30 @@ class FortifyServiceProvider extends ServiceProvider
         RateLimiter::for('two-factor', function (Request $request) {
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
         });
+
+                // 🚀 BLOQUE AÑADIDO: redirigir al login después del registro
+        Fortify::registerView(function () {
+            return view('auth.register');
+        });
+
+        // 🚀 Este bloque reemplaza Fortify::register()
+        Route::post('/register', function (Request $request) {
+            $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'password' => ['required', 'confirmed', \Illuminate\Validation\Rules\Password::defaults()],
+        ]);
+
+            $user = \App\Models\User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        ]);
+
+        event(new \Illuminate\Auth\Events\Registered($user));
+
+        // ✅ Redirige al login con mensaje
+    return redirect()->route('login')->with('success', 'Registro exitoso. Por favor inicia sesión.');
+});
     }
 }

@@ -4,11 +4,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Usuario\UsuarioController;
 use App\Http\Controllers\ReservaController;
+use App\Http\Controllers\Auth\RegisteredUserController; // 👈 Importamos tu controlador
 
 // Página pública de bienvenida
 Route::get('/', function () {
     return view('welcome');
 });
+
+// 🚀 Ruta personalizada para el registro (antes de las rutas protegidas)
+Route::post('/register', [RegisteredUserController::class, 'store'])
+    ->name('register.custom');
 
 // Rutas protegidas por autenticación
 Route::middleware([
@@ -39,7 +44,7 @@ Route::middleware([
 
     // Perfil
     Route::get('/profile', [ProfileController::class, 'show'])
-        ->name('profile.show');
+        ->name('user.profile.show');
 });
 
 
