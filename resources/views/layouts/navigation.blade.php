@@ -27,6 +27,10 @@
                             class="text-gray-200 hover:text-white font-medium transition">
                     {{ __('Usuarios') }}
                 </x-nav-link>
+                <x-nav-link :href="route('reservas.historial')" :active="request()->routeIs('reservas.historial')"
+                            class="text-gray-200 hover:text-white font-medium transition">
+                    {{ __('Historial de Reservas') }}
+                </x-nav-link>
                 
                 <!-- Buscador -->
                 <div class="relative">

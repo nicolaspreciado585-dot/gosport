@@ -36,7 +36,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Cancha extends Model
 {
-	protected $table = 'cancha';
+	protected $table = 'canchas';
 	protected $primaryKey = 'id_cancha';
 	public $timestamps = false;
 
