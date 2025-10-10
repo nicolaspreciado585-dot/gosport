@@ -6,73 +6,102 @@ use Illuminate\Http\Request;
 use App\Models\Reserva;
 use App\Models\Cancha;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 
 class ReservaController extends Controller
 {
-    // Mostrar historial de reservas del usuario con filtro y paginación (últimos 2 meses)
-    public function index(Request $request) {
-        $fechaLimite = Carbon::now()->subMonths(2);
+    /**
+     * 📜 Mostrar historial de reservas del usuario autenticado
+     */
+    public function index(Request $request)
+    {
+        $query = Reserva::where('id_cliente', Auth::id())->with('cancha');
 
-        $query = Reserva::where('id_cliente', Auth::id())
-            ->where('fecha_inicio', '>=', $fechaLimite)
-            ->with('cancha');
-
-        // Filtro por estado (pendiente, confirmada, cancelada)
+        // Filtro por estado
         if ($request->filled('estado')) {
             $query->where('estado', $request->estado);
         }
 
-        // Ordenar por fecha más reciente
+        // Paginación y orden (👈 corregido)
         $reservas = $query->orderBy('fecha_inicio', 'desc')->paginate(10);
 
-        return view('reservas.historial', compact('reservas'));
+        return view('Reservas.historial', compact('reservas'));
     }
 
-    // Mostrar formulario vacío para nueva reserva
-    public function createEmpty() {
+    /**
+     * 🆕 Mostrar formulario para crear una nueva reserva (sin cancha seleccionada)
+     */
+    public function createEmpty()
+    {
         $canchas = Cancha::all();
-        return view('reservas.create', compact('canchas'));
+        return view('Reservas.create', compact('canchas'));
     }
 
-    // Mostrar formulario de reserva para una cancha específica
-    public function create($id_cancha) {
+    /**
+     * 🆕 Mostrar formulario para crear una reserva con una cancha específica
+     */
+    public function create($id_cancha)
+    {
         $cancha = Cancha::findOrFail($id_cancha);
-        return view('reservas.create', compact('cancha'));
+        return view('Reservas.create', compact('cancha'));
     }
 
-    // Guardar nueva reserva
-    public function store(Request $request) {
-        $request->validate([
-            'id_cancha' => 'required|exists:canchas,id_cancha',
-            'fecha_inicio' => 'required|date',
-            'fecha_fin' => 'required|date|after:fecha_inicio',
-        ]);
+    /**
+     * 💾 Guardar nueva reserva
+     */
+    public function store(Request $request)
+{
+    $request->validate([
+        'id_cancha' => 'required|exists:canchas,id_cancha',
+        'fecha' => 'required|date',
+        'hora_inicio' => 'required',
+        'hora_fin' => 'required|after:hora_inicio',
+    ]);
 
-        Reserva::create([
-            'id_cliente' => Auth::id(),
-            'id_cancha' => $request->id_cancha,
-            'fecha_inicio' => $request->fecha_inicio,
-            'fecha_fin' => $request->fecha_fin,
-            'estado' => 'pendiente',
-        ]);
-
-        return redirect()->route('reservas.historial')->with('success', 'Reserva creada correctamente.');
+    //validador para no superar las 23:59   
+    if ($request->hora_fin > '23:59'){
+        return back()->withErrors(['hora_fin' => 'La hora de fin no puede pasar de las 11:59 p.m.'])
+                     ->withInput();
     }
 
-    // Mostrar formulario para editar reserva
-    public function edit(Reserva $reserva) {
+    Reserva::create([
+        'id_cliente' => Auth::id(),
+        'id_cancha' => $request->id_cancha,
+        'fecha_inicio' => $request->fecha . ' ' . $request->hora_inicio,
+        'fecha_fin' => $request->fecha . ' ' . $request->hora_fin,
+        'estado' => 'pendiente',
+    ]);
+
+        return redirect()->route('reservas.historial')->with('success', 'Reserva creada exitosamente');
+    }
+
+    /**
+     * ✏️ Mostrar formulario para editar una reserva existente
+     */
+    public function edit($id)
+    {
+        $reserva = Reserva::where('id_reserva', $id)
+            ->where('id_cliente', Auth::id())
+            ->firstOrFail();
+
         $canchas = Cancha::all();
-        return view('reservas.edit', compact('reserva', 'canchas'));
+
+        return view('Reservas.edit', compact('reserva', 'canchas'));
     }
 
-    // Actualizar reserva
-    public function update(Request $request, Reserva $reserva) {
+    /**
+     * 🔄 Actualizar los datos de una reserva
+     */
+    public function update(Request $request, $id)
+    {
+        $reserva = Reserva::where('id_reserva', $id)
+            ->where('id_cliente', Auth::id())
+            ->firstOrFail();
+
         $validated = $request->validate([
             'id_cancha' => 'required|exists:canchas,id_cancha',
             'fecha_inicio' => 'required|date',
             'fecha_fin' => 'required|date|after:fecha_inicio',
-            'estado' => 'nullable|in:pendiente,confirmada,cancelada',
+            'estado' => 'required|in:pendiente,confirmada,cancelada',
         ]);
 
         $reserva->update($validated);
@@ -80,9 +109,17 @@ class ReservaController extends Controller
         return redirect()->route('reservas.historial')->with('success', 'Reserva actualizada correctamente.');
     }
 
-    // Eliminar reserva
-    public function destroy(Reserva $reserva) {
+    /**
+     * ❌ Eliminar una reserva
+     */
+    public function destroy($id)
+    {
+        $reserva = Reserva::where('id_reserva', $id)
+            ->where('id_cliente', Auth::id())
+            ->firstOrFail();
+
         $reserva->delete();
+
         return redirect()->route('reservas.historial')->with('success', 'Reserva eliminada correctamente.');
     }
 }

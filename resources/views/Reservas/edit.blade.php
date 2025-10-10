@@ -1,58 +1,76 @@
-@extends('layouts.app')
+<x-app-layout>
+    <x-slot name="header">
+        <br><br><br>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Editar Reserva') }}
+        </h2>
+    </x-slot>
 
-@section('content')
-<div class="container">
-    <h1>Editar Reserva</h1>
+    <div class="py-8 px-6 bg-gray-100 min-h-screen">
+        <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-8">
+            
+            {{-- Mensaje de éxito --}}
+            @if(session('success'))
+                <div class="mb-4 p-4 bg-green-100 border border-green-300 text-green-800 rounded-lg">
+                    {{ session('success') }}
+                </div>
+            @endif
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+            {{-- Formulario de edición --}}
+            <form method="POST" action="{{ route('reservas.update', $reserva->id_reserva) }}">
+                @csrf
+                @method('PUT')
+
+                {{-- Selección de cancha --}}
+                <div class="mb-5">
+                    <label for="id_cancha" class="block text-gray-700 font-semibold mb-2">Cancha</label>
+                    <select name="id_cancha" id="id_cancha" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring focus:ring-indigo-200">
+                        @foreach($canchas as $cancha)
+                            <option value="{{ $cancha->id_cancha }}" {{ $reserva->id_cancha == $cancha->id_cancha ? 'selected' : '' }}>
+                                {{ $cancha->nombre }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                {{-- Fecha inicio --}}
+                <div class="mb-5">
+                    <label for="fecha_inicio" class="block text-gray-700 font-semibold mb-2">Fecha de Inicio</label>
+                    <input type="datetime-local" name="fecha_inicio" id="fecha_inicio"
+                        value="{{ \Carbon\Carbon::parse($reserva->fecha_inicio)->format('Y-m-d\TH:i') }}"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring focus:ring-indigo-200">
+                </div>
+
+                {{-- Fecha fin --}}
+                <div class="mb-5">
+                    <label for="fecha_fin" class="block text-gray-700 font-semibold mb-2">Fecha de Fin</label>
+                    <input type="datetime-local" name="fecha_fin" id="fecha_fin"
+                        value="{{ \Carbon\Carbon::parse($reserva->fecha_fin)->format('Y-m-d\TH:i') }}"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring focus:ring-indigo-200">
+                </div>
+
+                {{-- Estado --}}
+                <div class="mb-5">
+                    <label for="estado" class="block text-gray-700 font-semibold mb-2">Estado</label>
+                    <select name="estado" id="estado" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring focus:ring-indigo-200">
+                        <option value="pendiente" {{ $reserva->estado == 'pendiente' ? 'selected' : '' }}>Pendiente</option>
+                        <option value="confirmada" {{ $reserva->estado == 'confirmada' ? 'selected' : '' }}>Confirmada</option>
+                        <option value="cancelada" {{ $reserva->estado == 'cancelada' ? 'selected' : '' }}>Cancelada</option>
+                    </select>
+                </div>
+
+                {{-- Botones --}}
+                <div class="flex justify-end gap-3 mt-6">
+                    <a href="{{ route('reservas.historial') }}" 
+                       class="bg-gray-500 hover:bg-gray-400 text-white px-4 py-2 rounded-lg transition">
+                        Cancelar
+                    </a>
+                    <button type="submit" 
+                            class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg transition">
+                        Guardar Cambios
+                    </button>
+                </div>
+            </form>
         </div>
-    @endif
-
-    <form action="{{ route('reservas.update', $reserva->id_reserva) }}" method="POST">
-        @csrf
-        @method('PUT')
-
-        <div class="mb-3">
-            <label for="id_cancha" class="form-label">Cancha</label>
-            <select name="id_cancha" id="id_cancha" class="form-control">
-                @foreach($canchas as $cancha)
-                    <option value="{{ $cancha->id_cancha }}" 
-                        {{ $reserva->id_cancha == $cancha->id_cancha ? 'selected' : '' }}>
-                        {{ $cancha->nombre }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="fecha_reserva" class="form-label">Fecha</label>
-            <input type="date" name="fecha_reserva" id="fecha_reserva" class="form-control" 
-                value="{{ $reserva->fecha_reserva->format('Y-m-d') }}">
-        </div>
-
-        <div class="mb-3">
-            <label for="hora_inicio" class="form-label">Hora Inicio</label>
-            <input type="time" name="hora_inicio" id="hora_inicio" class="form-control" 
-                value="{{ $reserva->hora_inicio->format('H:i') }}">
-        </div>
-
-        <div class="mb-3">
-            <label for="estado" class="form-label">Estado</label>
-            <select name="estado" id="estado" class="form-control">
-                <option value="pendiente" {{ $reserva->estado == 'pendiente' ? 'selected' : '' }}>Pendiente</option>
-                <option value="confirmada" {{ $reserva->estado == 'confirmada' ? 'selected' : '' }}>Confirmada</option>
-                <option value="cancelada" {{ $reserva->estado == 'cancelada' ? 'selected' : '' }}>Cancelada</option>
-            </select>
-        </div>
-
-        <button type="submit" class="btn btn-success">Actualizar Reserva</button>
-        <a href="{{ route('reservas.historial') }}" class="btn btn-secondary">Cancelar</a>
-    </form>
-</div>
-@endsection
+    </div>
+</x-app-layout>
