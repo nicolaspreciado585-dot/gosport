@@ -11,4 +11,5 @@
   <p>El recurso solicitado no fue encontrado.</p>
   <a href="{{ url('/') }}" class="btn btn-dark mt-3">Volver al inicio</a>
 </div>
+<x-footer />
 @endsection

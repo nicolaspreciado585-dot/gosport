@@ -147,4 +147,5 @@
             document.addEventListener("DOMContentLoaded", () => filtrarCanchas('all'));
         </script>
     </div>
+    <x-footer />
 </x-app-layout>
